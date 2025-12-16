@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Samriddhi ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',sans-serif;background:linear-gradient(135deg,#ffd1dc,#ffe0f0);overflow-x:hidden;cursor:none;transition:background 2s ease}
+h1,.section-title{font-family:'Pacifico',cursive;background:linear-gradient(90deg,#ff4d6d,#ff85a2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s infinite}
+@keyframes shimmer{0%{background-position:-300px}100%{background-position:300px}}
+header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+.btn{padding:12px 25px;border:none;border-radius:50px;background:#ff7aa0;color:#fff;font-size:1.1em;cursor:pointer;transition:transform .3s,box-shadow .3s;margin:10px}
+.btn:hover{transform:scale(1.1);box-shadow:0 15px 30px rgba(0,0,0,.3)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+section{padding:80px 20px;text-align:center;animation:fadeUp 1.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.section-content{max-width:800px;margin:auto;font-size:1.1em;line-height:1.7}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;margin-top:40px}
+.gallery img{width:100%;max-width:260px;margin:auto;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,0.25);animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.blur{filter:blur(6px)}
+.heart-rain{position:fixed;width:16px;height:16px;background:red;transform:rotate(-45deg);animation:fall linear forwards;opacity:.8}
+.heart-rain:before,.heart-rain:after{content:"";position:absolute;width:16px;height:16px;background:red;border-radius:50%}
+.heart-rain:before{top:-8px;left:0}.heart-rain:after{left:8px;top:0}
+@keyframes fall{from{top:-10px;opacity:1}to{top:110%;opacity:0}}
+.cursor-heart{position:absolute;width:12px;height:12px;background:red;transform:rotate(-45deg);pointer-events:none;animation:trail 1s forwards}
+.cursor-heart:before,.cursor-heart:after{content:"";position:absolute;width:12px;height:12px;background:red;border-radius:50%}
+.cursor-heart:before{top:-6px;left:0}.cursor-heart:after{left:6px;top:0}
+@keyframes trail{to{opacity:0;transform:scale(2) rotate(-45deg)}}
+#result{padding:30px;border-radius:25px;box-shadow:0 0 40px rgba(255,122,160,.6);margin-top:40px}
+footer{padding:40px;text-align:center;font-size:1em}
+#qrcode{margin-top:20px}
+</style>
+</head>
+<body>
+<!-- Background Music -->
+<audio id="bgm" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Password Overlay -->
+<div id="lock" style="position:fixed;inset:0;background:linear-gradient(135deg,#ffd1dc,#ffe0f0);display:flex;align-items:center;justify-content:center;z-index:9999;">
+  <div style="background:#fff;padding:30px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;max-width:320px;width:90%">
+    <h2 class="section-title">A Small Key 💗</h2>
+    <p style="margin:10px 0 20px">This page is just for you.</p>
+    <input id="pw" type="password" placeholder="Enter password" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin-bottom:15px">
+    <button class="btn" onclick="unlock()">Open</button>
+    <p id="pwErr" style="color:#ff4d6d;margin-top:10px;display:none">Wrong password</p>
+  </div>
+</div>
+
+<header>
+  <h1>For Samriddhi ❤️</h1>
+  <p>You make my heart flutter every day.</p>
+  <button class="btn" onclick="document.getElementById('about').scrollIntoView()">Enter My Heart</button>
+</header>
+
+<section id="about">
+  <h2 class="section-title">About You</h2>
+  <p class="section-content">
+    Samriddhi, you are truly special. Your smile brings peace, warmth, and happiness. This page is my small way of showing how deeply I admire you.
+  </p>
+</section>
+
+<section id="memories">
+  <h2 class="section-title">Our Memories</h2>
+  <div class="gallery">
+    <img src="IMG-20251216-WA0001.jpg" alt="Memory Photo 1">
+    <img src="IMG-20251216-WA0002.jpg" alt="Memory Photo 2">
+  </div>
+</section>
+
+<section id="confession">
+  <h2 class="section-title">Confessing My Love</h2>
+  <p class="section-content">
+    I don’t know whether you love me or not, but I love you from my heart. I will never force you to be mine, but my feelings for you are true and pure, Samriddhi ❤️
+  </p>
+  <div>
+    <button class="btn" onclick="love()">You like me 💖</button>
+    <button class="btn" onclick="sad()">You don’t like me 💔</button>
+  </div>
+  <div id="result"></div>
+</section>
+
+<!-- QR Code Section -->
+<section id="qr-section">
+  <h2 class="section-title">Open on Mobile</h2>
+  <p class="section-content">Scan this QR code to open this page on your phone:</p>
+  <div id="qrcode"></div>
+</section>
+
+<footer>
+  Made with ❤️ by Siddhartha
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ===== PASSWORD GATE =====
+const PASSWORD='samriddhi';
+function unlock(){
+  const v=document.getElementById('pw').value;
+  if(v===PASSWORD){
+    document.getElementById('lock').style.display='none';
+    fadeInMusic();
+    autoLockIfAnswered();
+  }else document.getElementById('pwErr').style.display='block';
+}
+
+// ===== BACKGROUND MUSIC FADE =====
+const bgm=document.getElementById('bgm');
+bgm.volume=0;
+function fadeInMusic(){
+  bgm.play();
+  let v=0;
+  const i=setInterval(()=>{v+=0.02; bgm.volume=Math.min(v,0.4); if(v>=0.4) clearInterval(i)},200);
+}
+
+// ===== CURSOR HEART =====
+let last=0;
+document.addEventListener('mousemove',e=>{
+  const now=Date.now(); if(now-last<40)return; last=now;
+  const h=document.createElement('div'); h.className='cursor-heart';
+  h.style.left=e.pageX+'px'; h.style.top=e.pageY+'px';
+  document.body.appendChild(h); setTimeout(()=>h.remove(),1000);
+});
+
+// ===== TYPE SOUND =====
+const typeSound=new Audio('https://www.soundjay.com/mechanical/sounds/typewriter-key-1.mp3');
+typeSound.volume=0.2;
+function typeText(el,text,done){el.innerHTML=''; let i=0; const t=setInterval(()=>{el.innerHTML+=text.charAt(i); typeSound.currentTime=0; typeSound.play(); i++; if(i>=text.length){clearInterval(t); if(done)done();}},25);}
+
+// ===== HEART RAIN =====
+function rainHearts(){
+  for(let i=0;i<50;i++){
+    const h=document.createElement('div'); h.className='heart-rain';
+    h.style.left=Math.random()*100+'%'; h.style.animationDuration=3+Math.random()*3+'s';
+    document.body.appendChild(h); setTimeout(()=>h.remove(),6000);
+  }
+}
+function blurOn(){document.body.classList.add('blur')}
+function blurOff(){document.body.classList.remove('blur')}
+function disableButtons(){document.querySelectorAll('.confess-buttons .btn').forEach(b=>b.disabled=true)}
+function scrollToResult(){document.getElementById('result').scrollIntoView({behavior:'smooth'})}
+function thankYou(){const p=document.createElement('p');p.className='section-content';p.style.marginTop='20px';p.innerText='Thank you for reading till the end. Whatever you chose, it truly means a lot to me.';document.getElementById('result').appendChild(p);}
+function saveResponse(val){localStorage.setItem('response',val); localStorage.setItem('response_time',new Date().toString());}
+function autoLockIfAnswered(){if(localStorage.getItem('response')){disableButtons(); document.getElementById('result').innerHTML='<p class="section-content">You already shared your answer 🤍</p>';}}
+function love(){saveResponse('love'); disableButtons(); rainHearts(); document.body.style.background='linear-gradient(135deg,#ffb6c1,#ffe0f0)'; const res=document.getElementById('result'); blurOn(); setTimeout(()=>{blurOff(); typeText(res,"When you say that you like me, my heart feels lighter and happier than ever before. It feels as if all my quiet hopes have finally found a place to rest. Loving you is not about possession or promises, but about care, respect, and sincerity. I want to walk beside you, support your dreams, listen to your worries, and celebrate your smallest joys. Your smile gives me strength, and your presence brings peace to my soul. No matter what the future holds, I promise to value you, respect you, and choose you with honesty, patience, and a heart full of love.", thankYou); scrollToResult();},400);}
+function sad(){saveResponse('sad'); disableButtons(); rainHearts(); document.body.style.background='linear-gradient(135deg,#e0b0c1,#f5d0dd)'; const res=document.getElementById('result'); blurOn(); setTimeout(()=>{blurOff(); typeText(res,"Even if you say that you don’t like me, my feelings for you remain sincere and respectful. Loving you has taught me patience, understanding, and the courage to care deeply without expecting anything in return. I will never regret feeling this way, because you made my heart feel something real and beautiful. I promise to give you space, respect your choice, and always wish for your happiness. Even from a distance, my heart will silently hope that life treats you gently and fills your days with smiles, peace, and everything you truly deserve.", thankYou); scrollToResult();},400);}
+
+// ===== QR CODE =====
+const url = "https://your-website-url.com/for-samriddhi.html"; // <-- Replace with your hosted page URL
+new QRCode(document.getElementById("qrcode"), {
+    text: url,
+    width: 180,
+    height: 180,
+    colorDark: "#ff4d6d",
+    colorLight: "#fff",
+    correctLevel: QRCode.CorrectLevel.H
+});
+</script>
+</body>
+</html>
